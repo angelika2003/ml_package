@@ -12,6 +12,11 @@ def load_scaler():  # Новая функция для загрузки scaler
 
 def predict(data):
     model = load_model()
-    scaler = load_scaler()  # Загружаем scaler
-    data_scaled = scaler.transform(data)  # Масштабируем данные
+    scaler = load_scaler()
+    
+    # Если data это numpy array, преобразуем в DataFrame
+    if not isinstance(data, pd.DataFrame):
+        data = pd.DataFrame(data, columns=['batch_size', 'num_gpus', 'flops', 'parameters'])
+    
+    data_scaled = scaler.transform(data)
     return model.predict(data_scaled)
