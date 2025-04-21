@@ -3,7 +3,7 @@ import os
 from pkg_resources import resource_filename
 
 def load_model():
-    model_path = resource_filename(__name__, 'model/random_forest_model.joblib')
+    model_path = resource_filename("ml_package", 'model/random_forest_model.joblib')
     return load(model_path)
 
 def load_scaler():  # Новая функция для загрузки scaler
