@@ -14,9 +14,11 @@ def predict(data):
     model = load_model()
     scaler = load_scaler()
     
-    # Если data это numpy array, преобразуем в DataFrame
-    if not isinstance(data, pd.DataFrame):
-        data = pd.DataFrame(data, columns=['batch_size', 'num_gpus', 'flops', 'parameters'])
+    # Проверка названий
+    expected_columns = ['batch_size', 'num_gpus', 'flops', 'parameters']
+    if isinstance(data, pd.DataFrame):
+        if list(data.columns) != expected_columns:
+            raise ValueError(f"Columns must be: {expected_columns}")
     
     data_scaled = scaler.transform(data)
     return model.predict(data_scaled)
