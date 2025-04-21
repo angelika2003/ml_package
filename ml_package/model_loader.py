@@ -1,6 +1,7 @@
 from joblib import load
 import os
 from pkg_resources import resource_filename
+import pandas as pd
 
 def load_model():
     model_path = resource_filename("ml_package", 'model/random_forest_model.joblib')
